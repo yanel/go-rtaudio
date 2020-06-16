@@ -1,7 +1,5 @@
 package main
 
-// import "github.com/yanel/rtaudio"
-
 import (
 	"fmt"
 	"log"
@@ -9,9 +7,10 @@ import (
 	"time"
 
 	"./rtaudio"
+	//"github.com/yanel/go-rtaudio"
 )
 
-func exampleCompiledAPI() {
+func showCompiledAPI() {
 
 	log.Println("RtAudio version : ", rtaudio.Version())
 
@@ -20,8 +19,9 @@ func exampleCompiledAPI() {
 	}
 }
 
-func audioDeviceList() {
-	audio, err := rtaudio.Create(rtaudio.APIWindowsASIO)
+func showDeviceList() {
+	audio, err := rtaudio.Create(rtaudio.APIUnspecified)
+	//audio, err := rtaudio.Create(rtaudio.APIWindowsASIO)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,7 +52,7 @@ func play() {
 	defer audio.Destroy()
 
 	params := rtaudio.StreamParams{
-		DeviceID:     3, //uint(audio.DefaultOutputDevice()),
+		DeviceID:     uint(audio.DefaultOutputDevice()),
 		NumChannels:  2,
 		FirstChannel: 0,
 	}
@@ -77,13 +77,13 @@ func play() {
 	defer audio.Close()
 	audio.Start()
 	defer audio.Stop()
-	time.Sleep(3 * time.Second)
+
 }
 
 func main() {
 
-	exampleCompiledAPI()
-	audioDeviceList()
+	showCompiledAPI()
+	showDeviceList()
 	//play()
 
 }
