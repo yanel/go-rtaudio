@@ -6,8 +6,7 @@ import (
 	"math"
 	"time"
 
-	"./rtaudio"
-	//"github.com/yanel/go-rtaudio"
+	"github.com/yanel/go-rtaudio"
 )
 
 func showCompiledAPI() {
